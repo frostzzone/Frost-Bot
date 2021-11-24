@@ -1,0 +1,320 @@
+(async () => {
+    //hello :) hehe
+    let process = require('process');
+    process.on('uncaughtException', function(err) {
+        console.log(err);
+    });
+    let Discord = require("discord.js")
+    let Database = require("easy-json-database")
+    let {
+        MessageEmbed,
+        MessageButton,
+        MessageActionRow,
+        Intents,
+        Permissions,
+        MessageSelectMenu
+    } = require("discord.js")
+    let logs = require("discord-logs")
+    let https = require("https")
+    const akinator = require("discord.js-akinator");
+    const lyricsFinder = require('lyrics-finder');
+    const ticket = require('tickets-discord');
+    const {
+        start,
+        login
+    } = require('tickets-discord');
+    const SnakeGame = require('snakecord')
+    require('events').EventEmitter.defaultMaxListeners = 50;
+    const devMode = typeof __E_IS_DEV !== "undefined" && __E_IS_DEV;
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    const s4d = {
+        Discord,
+        database: new Database(`${devMode ? S4D_NATIVE_GET_PATH : "."}/database.json`),
+        joiningMember: null,
+        reply: null,
+        tokenInvalid: false,
+        tokenError: null,
+        player: null,
+        manager: null,
+        Inviter: null,
+        message: null,
+        notifer: null,
+        checkMessageExists() {
+            if (!s4d.client) throw new Error('You cannot perform message operations without a Discord.js client')
+            if (!s4d.client.readyTimestamp) throw new Error('You cannot perform message operations while the bot is not connected to the Discord API')
+        }
+    };
+    s4d.client = new s4d.Discord.Client({
+        intents: [Object.values(s4d.Discord.Intents.FLAGS).reduce((acc, p) => acc | p, 0)],
+        partials: ["REACTION"]
+    });
+    logs(s4d.client);
+    var prefix, command, arguments2, commandwithprefix;
+
+
+    await s4d.client.login(process.env.token).catch((e) => {
+        s4d.tokenInvalid = true;
+        s4d.tokenError = e;
+    });
+
+    ticket.login('local');
+
+    ticket.start(s4d.client)
+
+    s4d.client.on('ready', async () => {
+        prefix = ',';
+
+      while (s4d.client && s4d.client.token) {
+            await delay(Number(10) * 1000);
+            s4d.client.user.setActivity("your life", {
+                type: "STREAMING",
+                url: 'https://github.com/frostzzone'
+            });
+      
+            await delay(Number(10) * 1000);
+            s4d.client.user.setPresence({
+                status: "online",
+                activities: [{
+                    name: 'the sounds of rain and /help',
+                    type: "LISTENING"
+                }]
+            });
+            await delay(Number(5) * 1000);
+
+            console.log('loop ran')
+        }
+
+    });
+
+    s4d.client.on('interactionCreate', async (interaction) => {
+        let member = interaction.guild.members.cache.get(interaction.member.user.id)
+      if ((interaction.commandName) == 'help') {
+            await interaction.reply({
+                embeds: [{
+                    title: 'Help',
+                    color: null,
+                    image: {
+                        url: null
+                    },
+                    description: ('/aki - play akinator' + '\n/s4d - gives link for the specified preview (implemented in s4d faq bot)\n/ticket\n⠀↳⠀channel:#channel - set channel to ticket channel\n⠀↳⠀option:close - closes ticket (send in open ticket)\n⠀↳⠀option:archive - archive ticket (send in open ticket)\n'),
+                    footer: {
+                        text: 'These commands also work with the prefix ,'
+                    },
+                    thumbnail: {
+                        url: null
+                    }
+                }],
+            });
+        }
+      if ((interaction.commandName) == 's4d') {
+await interaction.reply({
+                content: (['[here is the  ', interaction.options.getInteger('version'), ' link]', '(<https://deploy-preview-', interaction.options.getInteger('version'), '--scratch-for-discord.netlify.app>)'].join('')),
+                ephemeral: false,
+                components: []
+            });
+      }
+        if ((interaction.commandName) == 'say') {
+            await interaction.reply({
+                content: (interaction.options.getString('text')),
+                ephemeral: false,
+                components: []
+            });
+        }
+        if ((interaction.commandName) == 'ticketset') {
+          ticket.setup(interaction, interaction. options.getChannel('channel').id);
+                        await interaction.repinteraction.reply({
+                            content: String((['I have set the ticket channel to ', '<#', interaction.options.getChannel('channel'), '>'].join('')))
+        })
+        }
+                                                               
+      if ((interaction. commandName) == 'ticketclose'){
+        
+      }
+        if ((interaction.commandName) == 'snake') {
+          await interaction.reply({
+            content: (snakeGame.newGame(interaction)),
+            ephemeral: false,
+            components: []
+            
+          })
+        }
+        if ((interaction.commandName) == 'aki') {
+          await interaction.reply({
+            content:(
+            akinator(interaction,{
+                language: "en",
+                childMode: true,
+                gameType: (interaction.options.getString('type')),
+                useButtons: true
+            })),
+            ephemeral: true,
+            components: []
+          })
+        }
+
+    });
+
+
+    s4d.client.on('messageCreate', async (s4dmessage) => {
+        if (!((s4dmessage.author).bot)) {
+            arguments2 = (s4dmessage.content).split(' ');
+            commandwithprefix = arguments2.splice(0, 1)[0];
+            if ((commandwithprefix || '').startsWith(prefix || '')) {
+                command = commandwithprefix.slice(((prefix.length + 1) - 1), commandwithprefix.length);
+                if (command == 'aki') {
+                    (s4dmessage.channel).send({
+                        embeds: [{
+                            title: 'Akinator',
+                            color: '#ff0000',
+                            image: {
+                                url: null
+                            },
+                            description: (['Think about something and awnser questions about it', '\n', '\n', '👤Character - I\'m thinking of a character', '\n', '🏠Object - I\'m thinking of an object', '\n', '🐛Animal - I\'m thinking of an animal'].join('')),
+                            footer: {
+                                text: null
+                            },
+                            thumbnail: {
+                                url: null
+                            }
+                        }],
+                        components: [(new MessageActionRow()
+                            .addComponents(new MessageButton()
+                                .setCustomId('c')
+                                .setLabel('Character')
+                                .setEmoji('👤')
+                                .setStyle(('SUCCESS')),
+                                new MessageButton()
+                                .setCustomId('o')
+                                .setLabel('Object')
+                                .setEmoji('🏠')
+                                .setStyle(('DANGER')),
+                                new MessageButton()
+                                .setCustomId('a')
+                                .setLabel('Animal')
+                                .setEmoji('🐛')
+                                .setStyle(('PRIMARY')),
+                            ))]
+                    }).then(m => {
+                        let collector = m.createMessageComponentCollector({
+                            filter: i => i.user.id === (s4dmessage.author).id,
+                            time: 60000
+                        });
+                        collector.on('collect', async i => {
+                            if ((i.customId) == 'c') {
+                                akinator(s4dmessage, {
+                                    language: "en",
+                                    childMode: true,
+                                    gameType: 'character',
+                                    useButtons: true
+                                })
+                            } else if ((i.customId) == 'a') {
+                                akinator(s4dmessage, {
+                                    language: "en",
+                                    childMode: true,
+                                    gameType: 'animal',
+                                    useButtons: true
+                                })
+                            } else if ((i.customId) == 'o') {
+                                akinator(s4dmessage, {
+                                    language: "en",
+                                    childMode: true,
+                                    gameType: 'object',
+                                    useButtons: true
+                                })
+                            }
+
+                        })
+
+                    });
+                }
+                if (command == 'snake') {
+                    (s4dmessage.channel).send({
+                        embeds: [{
+                            title: 'Snake',
+                            color: '#ff0000',
+                            image: {
+                                url: null
+                            },
+                            description: (['Use reactions to move', '\n', 'Eat apples 🍎 to get longer', '\n', 'If you go to the edge you\'ll go back around'].join('')),
+                            footer: {
+                                text: 'End the game by running into yourself'
+                            },
+                            thumbnail: {
+                                url: null
+                            }
+                        }],
+                        components: [(new MessageActionRow()
+                            .addComponents(new MessageButton()
+                                .setCustomId('s')
+                                .setLabel('Play')
+                                .setEmoji('🐍')
+                                .setStyle(('SUCCESS')),
+                            ))]
+                    }).then(m => {
+                        let collector = m.createMessageComponentCollector({
+                            filter: i => i.user.id === (s4dmessage.author).id,
+                            time: 60000
+                        });
+                        collector.on('collect', async i => {
+                            if ((i.customId) == 's') {
+
+                                const snakeGame = new SnakeGame({
+                title: 'Snake Game',
+                color: 'GREEN',
+                timestamp: false,
+                gameOverTitle: 'Game Over'
+            });
+            snakeGame.newGame(s4dmessage);
+                            }
+
+                        })
+
+                    });
+                }
+                // This will set your ticket channel to mentioned channel
+                if (command == 'ticket') {
+                    try {
+                        ticket.setup(s4dmessage, s4dmessage.mentions.channels.first().id);
+                        s4dmessage.channel.send({
+                            content: String((['I have set the ticket channel to ', '<#', s4dmessage.mentions.channels.first(), '>'].join('')))
+                        });
+
+                    } catch (err) {
+                        s4dmessage.channel.send({
+                            content: String('U need to mention a channel!')
+                        });
+
+                    };
+                }
+                if (command == 'close') {
+                    ticket.close(s4dmessage.channel);
+                    s4dmessage.channel.send({
+                        content: String('Closed the ticket')
+                    });
+                }
+                if (command == 'archive') {
+                    s4dmessage.channel.send({
+                        content: String('Archived the ticket')
+                    });
+                    ticket.archive(s4dmessage.channel);
+                }
+                if (command == 'unarchive') {
+                    s4dmessage.channel.send({
+                        content: String('Unarchived the ticket')
+                    });
+                    ticket.unarchive(s4dmessage.channel);
+                }
+            }
+        }
+
+    });
+
+    return s4d
+})();;
+
+const http = require('http');
+const server = http.createServer((req, res) => {
+  res.writeHead(200);
+  res.end('Bot is online');
+});
+server.listen(3000); 

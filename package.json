@@ -1,0 +1,26 @@
+{
+    "name": "scratch-for-discord-bot",
+    "version": "1.0.0",
+    "main": "bot.js",
+    "scripts": {
+        "start": "node .",
+        "node-update": "npm i --save-dev node@16 && npm config set prefix=$(pwd)/node_modules/node && export PATH=$(pwd)/node_modules/node/bin:$PATH",
+        "node-clean": "rm -rf node_modules && rm package-lock.json && npm cache clear --force && npm cache clean --force && npm i"
+    },
+    "dependencies": {
+        "discord-images": "^0.1.6",
+        "discord-logs": "^2.0.1",
+        "discord.js": "^13.3.1",
+        "discord.js-akinator": "^3.3.1",
+        "djs-games": "git+https://github.com/GizmolabAI/djs-games.git",
+        "easy-json-database": "^1.5.0",
+        "lyrics-finder": "^21.7.0",
+        "ms": "^2.1.3",
+        "process": "^0.11.10",
+        "snakecord": "git+https://github.com/frostzzone/snakecord.git",
+        "tickets-discord": "^2.9.3"
+    },
+    "devDependencies": {
+        "node": "^16.10.0"
+    }
+}
