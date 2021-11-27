@@ -23,7 +23,8 @@
     start,
     login
   } = require('tickets-discord');
-  const SnakeGame = require('snakecord')
+  const SnakeGame = require('snakecord');
+  const { Snake } = require('weky');
   require('events').EventEmitter.defaultMaxListeners = 50;
   const devMode = typeof __E_IS_DEV !== "undefined" && __E_IS_DEV;
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -57,9 +58,15 @@
     s4d.tokenError = e;
   });
 
-  ticket.login('local');
+  ticket.start(s4d.client, 'local');
 
-  ticket.start(s4d.client)
+  //create webserver
+const http = require('http');
+const server = http.createServer((req, res) => {
+    res.writeHead(200);
+    res.end('This site was created for make bot online 25/8');
+});
+server.listen(3000);
 
   s4d.client.on('ready', async () => {
     prefix = ',';
@@ -280,50 +287,7 @@
 
           });
         }
-        if (command == 'snake') {
-          (s4dmessage.channel).send({
-            embeds: [{
-              title: 'Snake',
-              color: '#ff0000',
-              image: {
-                url: null
-              },
-              description: (['Use reactions to move', '\n', 'Eat apples 🍎 to get longer', '\n', 'If you go to the edge you\'ll go back around'].join('')),
-              footer: {
-                text: 'End the game by running into yourself'
-              },
-              thumbnail: {
-                url: null
-              }
-            }],
-            components: [(new MessageActionRow()
-              .addComponents(new MessageButton()
-                .setCustomId('s')
-                .setLabel('Play')
-                .setEmoji('🐍')
-                .setStyle(('SUCCESS')),
-              ))]
-          }).then(m => {
-            let collector = m.createMessageComponentCollector({
-              filter: i => i.user.id === (s4dmessage.author).id,
-              time: 60000
-            });
-            collector.on('collect', async i => {
-              if ((i.customId) == 's') {
-
-                const snakeGame = new SnakeGame({
-                  title: 'Snake Game',
-                  color: 'GREEN',
-                  timestamp: false,
-                  gameOverTitle: 'Game Over'
-                });
-                snakeGame.newGame(s4dmessage);
-              }
-
-            })
-
-          });
-        }
+    
         // This will set your ticket channel to mentioned channel
         if (command == 'ticket') {
           try {
@@ -357,6 +321,26 @@
           });
           ticket.unarchive(s4dmessage.channel);
         }
+    if (command == 'eval') {
+            if ((s4dmessage.member.id) == '712342308565024818') {
+                try {
+                    s4dmessage.delete();
+                    await eval((arguments2.join(' ')));
+
+                } catch (err) {
+                  
+                    s4dmessage.channel.send({
+                        content: String('I ran into an error')
+                    }).then(async (s4dreply) => {
+                        s4dmessage.delete();
+                        await delay(Number(10) * 1000);
+                        s4dreply.delete();
+
+                    });
+
+                };
+            }
+        }
       }
     }
 
@@ -365,9 +349,3 @@
   return s4d
 })();;
 
-const http = require('http');
-const server = http.createServer((req, res) => {
-  res.writeHead(200);
-  res.end('Bot is online');
-});
-server.listen(3000); 
