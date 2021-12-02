@@ -127,6 +127,18 @@ server.listen(3000);
         components: []
       });
     }
+    if ((interaction.commandName) == 'invite') {
+            let embed = new Discord.MessageEmbed()
+            embed.setTitle('Thanks,')
+                .setURL();
+            embed.setDescription('[My invite link :D](https://discord.com/api/oauth2/authorize?client_id=905539161501609985&permissions=137707719760&scope=applications.commands%20bot)');
+
+            await interaction.reply({
+                embeds: [(embed)],
+                ephemeral: false,
+                components: []
+            });
+        }
     if ((interaction.commandName) == 'ticketset') {
       let member = interaction.guild.members.cache.get(interaction.member.user.id)
       if ((interaction.member).permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
@@ -222,6 +234,8 @@ server.listen(3000);
       if ((commandwithprefix || '').startsWith(prefix || '')) {
         command = commandwithprefix.slice(((prefix.length + 1) - 1), commandwithprefix.length);
         if (command == 'aki') {
+          s4dmessage.channel.sendTyping();
+          await delay(Number(2) * 1000);
           (s4dmessage.channel).send({
             embeds: [{
               title: 'Akinator',
@@ -287,7 +301,18 @@ server.listen(3000);
 
           });
         }
-    
+    if (command == 'invite') {
+            let embed = new Discord.MessageEmbed()
+            embed.setTitle('Thanks,')
+                .setURL();
+            embed.setDescription('[My invite link :D](https://discord.com/api/oauth2/authorize?client_id=905539161501609985&permissions=137707719760&scope=applications.commands%20bot)');
+
+            await s4dmessage.reply({
+                embeds: [(embed)],
+                ephemeral: false,
+                components: []
+            });
+        }
         // This will set your ticket channel to mentioned channel
         if (command == 'ticket') {
           try {
@@ -345,7 +370,7 @@ server.listen(3000);
     }
 
   });
-
+  
   return s4d
 })();;
 

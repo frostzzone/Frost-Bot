@@ -8,11 +8,11 @@
         "node-clean": "rm -rf node_modules && rm package-lock.json && npm cache clear --force && npm cache clean --force && npm i"
     },
     "dependencies": {
-        "cheerio": "^1.0.0-rc.10",
         "discord-images": "^0.1.6",
         "discord-logs": "^2.0.1",
         "discord-music-player": "^8.3.1",
         "discord-player": "^5.1.0",
+        "discord-tictactoe": "^2.1.1",
         "discord.js": "^13.3.1",
         "discord.js-akinator": "^3.3.1",
         "djs-games": "git+https://github.com/GizmolabAI/djs-games.git",
