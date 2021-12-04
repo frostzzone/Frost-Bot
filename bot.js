@@ -103,7 +103,20 @@ server.listen(3000);
           image: {
             url: null
           },
-          description: ('/aki - play akinator' + '\n/s4d - gives link for the specified preview (implemented in s4d faq bot)\n/ticket\n⠀↳⠀channel:#channel - set channel to ticket channel\n⠀↳⠀option:close - closes ticket (send in open ticket)\n⠀↳⠀option:archive - archive ticket (send in open ticket)\n'),
+          description: ('/aki - play akinator'+
+                        '\n'+
+                        '/s4d - gives link for the specified preview (implemented in s4d faq bot)'+
+                        '\n'+ 
+                        '/ticketset channel:#channel - set channel to ticket channel'+
+                        '\n'+
+                        '/ticketclose - closes ticket (send in open ticket)'+
+                        '\n'+
+                        '/ticketarchive - archive ticket (send in open ticket)
+                        '\n'+
+                        '/ticketunarchive - unarchives an archived ticket (send in archived ticket)'+
+                        '\n'+
+                        'more soon'+
+                       '\n'),
           footer: {
             text: 'These commands also work with the prefix ,'
           },
@@ -233,9 +246,42 @@ server.listen(3000);
       commandwithprefix = arguments2.splice(0, 1)[0];
       if ((commandwithprefix || '').startsWith(prefix || '')) {
         command = commandwithprefix.slice(((prefix.length + 1) - 1), commandwithprefix.length);
+        if (command == 'help') {
+        s4dmessage.channel.sendTyping();
+          await delay(Number(1) * 1000);
+          s4dmessage.channel.send({
+            embeds: [{
+          title: 'Help',
+          color: null,
+          image: {
+            url: null
+          },
+          description: ('/aki - play akinator'+
+                        '\n'+
+                        '/s4d - gives link for the specified preview (implemented in s4d faq bot)'+
+                        '\n'+ 
+                        '/ticketset channel:#channel - set channel to ticket channel'+
+                        '\n'+
+                        '/ticketclose - closes ticket (send in open ticket)'+
+                        '\n'+
+                        '/ticketarchive - archive ticket (send in open ticket)
+                        '\n'+
+                        '/ticketunarchive - unarchives an archived ticket (send in archived ticket)'+
+                        '\n'+
+                        'more soon'+
+                       '\n'),
+          footer: {
+            text: 'These commands also work with the prefix ,'
+          },
+          thumbnail: {
+            url: null
+          }
+        }],
+      });
+        }
         if (command == 'aki') {
           s4dmessage.channel.sendTyping();
-          await delay(Number(2) * 1000);
+          await delay(Number(1) * 1000);
           (s4dmessage.channel).send({
             embeds: [{
               title: 'Akinator',
