@@ -111,7 +111,7 @@ server.listen(3000);
                         '\n'+
                         '/ticketclose - closes ticket (send in open ticket)'+
                         '\n'+
-                        '/ticketarchive - archive ticket (send in open ticket)
+                        '/ticketarchive - archive ticket (send in open ticket)'+
                         '\n'+
                         '/ticketunarchive - unarchives an archived ticket (send in archived ticket)'+
                         '\n'+
@@ -256,17 +256,17 @@ server.listen(3000);
           image: {
             url: null
           },
-          description: ('/aki - play akinator'+
+          description: (',aki - play akinator'+
                         '\n'+
-                        '/s4d - gives link for the specified preview (implemented in s4d faq bot)'+
+                        ',s4d - gives link for the specified preview (implemented in s4d faq bot)'+
                         '\n'+ 
-                        '/ticketset channel:#channel - set channel to ticket channel'+
+                        ',ticketset channel:#channel - set channel to ticket channel'+
                         '\n'+
-                        '/ticketclose - closes ticket (send in open ticket)'+
+                        ',ticketclose - closes ticket (send in open ticket)'+
                         '\n'+
-                        '/ticketarchive - archive ticket (send in open ticket)
+                        ',ticketarchive - archive ticket (send in open ticket)'+
                         '\n'+
-                        '/ticketunarchive - unarchives an archived ticket (send in archived ticket)'+
+                        ',ticketunarchive - unarchives an archived ticket (send in archived ticket)'+
                         '\n'+
                         'more soon'+
                        '\n'),
