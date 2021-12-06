@@ -383,7 +383,7 @@ server.listen(3000);
                 random = mathRandomInt(1, 1000);
                 if (random == 69) {
                     s4d.database.add(String((String((s4dmessage.author).id) + '-cash')), parseInt(1000));
-                    s4dmessage.channel.send({
+                    s4dmessage.reply({
                     
                             embeds: [{
                                 title: '🙏 Blessed',
@@ -404,7 +404,7 @@ server.listen(3000);
                 } else {
                     random = mathRandomInt(1, 200);
                     s4d.database.add(String((String((s4dmessage.author).id) + '-cash')), parseInt(random));
-                    s4dmessage.channel.send({
+                    s4dmessage.reply({
                         
                             embeds: [{
                                 title: 'Begger',
@@ -426,7 +426,7 @@ server.listen(3000);
             } else {
                 random = mathRandomInt(1, 200);
                 s4d.database.set(String((String((s4dmessage.author).id) + '-cash')), (Number(random)));
-                s4dmessage.channel.send({
+                s4dmessage.reply({
                   
                         embeds: [{
                             title: 'Begger',
