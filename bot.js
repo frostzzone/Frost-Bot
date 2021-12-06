@@ -50,8 +50,17 @@
     partials: ["REACTION"]
   });
   logs(s4d.client);
-  var prefix, command, arguments2, commandwithprefix;
+  var prefix, command, arguments2, commandwithprefix, random;
 
+  function mathRandomInt(a, b) {
+        if (a > b) {
+            // Swap a and b to ensure a is smaller.
+            var c = a;
+            a = b;
+            b = c;
+        }
+        return Math.floor(Math.random() * (b - a + 1) + a);
+    }
 
   await s4d.client.login(process.env.token).catch((e) => {
     s4d.tokenInvalid = true;
@@ -262,11 +271,11 @@ server.listen(3000);
                         '\n'+ 
                         ',ticketset channel:#channel - set channel to ticket channel'+
                         '\n'+
-                        ',ticketclose - closes ticket (send in open ticket)'+
+                        ',close - closes ticket (send in open ticket)'+
                         '\n'+
-                        ',ticketarchive - archive ticket (send in open ticket)'+
+                        ',archive - archive ticket (send in open ticket)'+
                         '\n'+
-                        ',ticketunarchive - unarchives an archived ticket (send in archived ticket)'+
+                        ',unarchive - unarchives an archived ticket (send in archived ticket)'+
                         '\n'+
                         'more soon'+
                        '\n'),
@@ -347,6 +356,15 @@ server.listen(3000);
 
           });
         }
+        if (command == 'snake') {
+          const snakeGame = new SnakeGame({
+            title: 'Snake Game',
+            color: 'GREEN',
+            timestamp: false,
+            gameOverTitle: 'Game Over'
+        });
+        snakeGame.newGame(s4dmessage);
+        }
     if (command == 'invite') {
             let embed = new Discord.MessageEmbed()
             embed.setTitle('Thanks,')
@@ -359,6 +377,76 @@ server.listen(3000);
                 components: []
             });
         }
+
+        if (command == 'beg') {
+            if (s4d.database.has(String((String((s4dmessage.author).id) + '-cash')))) {
+                random = mathRandomInt(1, 1000);
+                if (random == 69) {
+                    s4d.database.add(String((String((s4dmessage.author).id) + '-cash')), parseInt(1000));
+                    s4dmessage.channel.send({
+                    
+                            embeds: [{
+                                title: '🙏 Blessed',
+                                color: null,
+                                image: {
+                                    url: null
+                                },
+                                description: '"Here have `1000` coins" - frostzzone',
+                                footer: {
+                                    text: 'You got the 1 in 1000 chance'
+                                },
+                                thumbnail: {
+                                    url: null
+                                }
+                            }],
+                        
+                    });
+                } else {
+                    random = mathRandomInt(1, 200);
+                    s4d.database.add(String((String((s4dmessage.author).id) + '-cash')), parseInt(random));
+                    s4dmessage.channel.send({
+                        
+                            embeds: [{
+                                title: 'Begger',
+                                color: null,
+                                image: {
+                                    url: null
+                                },
+                                description: (['"Here have `', random, '` coins" - Random person'].join('')),
+                                footer: {
+                                    text: 'Theres a 1 in 1000 chance for begging'
+                                },
+                                thumbnail: {
+                                    url: null
+                                }
+                            }],
+                        
+                    });
+                }
+            } else {
+                random = mathRandomInt(1, 200);
+                s4d.database.set(String((String((s4dmessage.author).id) + '-cash')), (Number(random)));
+                s4dmessage.channel.send({
+                  
+                        embeds: [{
+                            title: 'Begger',
+                            color: null,
+                            image: {
+                                url: null
+                            },
+                            description: (['"Here have `', random, '` coins" - Random person'].join('')),
+                            footer: {
+                                text: 'Theres a 1 in 1000 chance for begging'
+                            },
+                            thumbnail: {
+                                url: null
+                            }
+                        }],
+                    
+                });
+            }
+        }
+        
         // This will set your ticket channel to mentioned channel
         if (command == 'ticket') {
           try {
