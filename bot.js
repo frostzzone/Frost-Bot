@@ -277,8 +277,10 @@ server.listen(3000);
                         '\n'+
                         ',unarchive - unarchives an archived ticket (send in archived ticket)'+
                         '\n'+
-
-
+                        ',beg'+
+                        '\n'+
+                        ',bal'+
+                        '\n'+
                         'more soon'+
                        '\n'),
           footer: {
