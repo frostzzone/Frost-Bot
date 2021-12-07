@@ -519,7 +519,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
 
 
                             ],
-                            ,
+                            
                             allowedMentions: {
                                 repliedUser: true
                             }
@@ -536,7 +536,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
 
 
                             ],
-                            ,
+                            
                             allowedMentions: {
                                 repliedUser: true
                             }
@@ -557,7 +557,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
 
 
                                 ],
-                                ,
+                                
                                 allowedMentions: {
                                     repliedUser: true
                                 }
@@ -572,7 +572,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
 
 
                                 ],
-                                ,
+                                
                                 allowedMentions: {
                                     repliedUser: true
                                 }
@@ -591,7 +591,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
 
 
                             ],
-                            ,
+                            
                             allowedMentions: {
                                 repliedUser: true
                             }
@@ -606,7 +606,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
 
 
                             ],
-                            ,
+                            
                             allowedMentions: {
                                 repliedUser: true
                             }
