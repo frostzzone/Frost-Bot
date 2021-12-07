@@ -382,6 +382,9 @@ server.listen(3000);
             if (!s4d.database.has(String((String((s4dmessage.author).id) + '-begcd')))) {
                 s4d.database.set(String((String((s4dmessage.author).id) + '-begcd')), ((Math.floor(new Date().getTime() / 1000)) - 1));
             }
+          if (!s4d.database.has(String((String((s4dmessage.author).id) + '-bank')))) {
+            s4d.database.set(String((String((s4dmessage.author).id) + '-bank')), 0);
+        }
             if (s4d.database.get(String((String((s4dmessage.author).id) + '-begcd'))) <= (Math.floor(new Date().getTime() / 1000))) {
                 if (s4d.database.has(String((String((s4dmessage.author).id) + '-cash')))) {
                     random = mathRandomInt(1, 1000);
@@ -402,7 +405,7 @@ server.listen(3000);
                                     url: null
                                 }
                             }],
-                            ,
+                            
                             allowedMentions: {
                                 repliedUser: true
                             }
@@ -425,7 +428,7 @@ server.listen(3000);
                                     url: null
                                 }
                             }],
-                            ,
+                            
                             allowedMentions: {
                                 repliedUser: true
                             }
@@ -449,7 +452,7 @@ server.listen(3000);
                                 url: null
                             }
                         }],
-                        ,
+                        
                         allowedMentions: {
                             repliedUser: true
                         }
@@ -472,14 +475,60 @@ server.listen(3000);
                             url: null
                         }
                     }],
-                    ,
+                    
                     allowedMentions: {
                         repliedUser: true
                     }
                 });
             }
         }
-        
+
+        if (command == 'bal') {
+            if (s4d.database.has(String((String((s4dmessage.author).id) + '-cash')))) {
+                s4dmessage.reply({
+                    embeds: [{
+                        title: (String((s4dmessage.author).username) + '\'s balance'),
+                        color: null,
+                        image: {
+                            url: null
+                        },
+                        description: ('**Cash**: ' + String(s4d.database.get(String((String((s4dmessage.author).id) + '-cash'))))),
+                        footer: {
+                            text: null
+                        },
+                        thumbnail: {
+                            url: null
+                        }
+                    }],
+                    
+                    allowedMentions: {
+                        repliedUser: true
+                    }
+                });
+            } else {
+                s4dmessage.reply({
+                    embeds: [{
+                        title: (String((s4dmessage.author).username) + '\'s balance'),
+                        color: null,
+                        image: {
+                            url: null
+                        },
+                        description: 'You have never played before',
+                        footer: {
+                            text: null
+                        },
+                        thumbnail: {
+                            url: null
+                        }
+                    }],
+                    
+                    allowedMentions: {
+                        repliedUser: true
+                    }
+                });
+            }
+        }
+                      
         // This will set your ticket channel to mentioned channel
         if (command == 'ticket') {
           try {
