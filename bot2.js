@@ -512,21 +512,6 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                     if (s4d.database.has(String((String((s4dmessage.mentions.members.first().user).id) + '-cash'))) && s4d.database.has(String((String((s4dmessage.mentions.members.first().user).id) + '-bank')))) {
                         s4dmessage.reply({
                             embeds: [new MessageEmbed()
-                                .setTitle(String((['**', (s4dmessage.mentions.members.first().user).username, '\'s Balance**'].join(''))))
-
-
-                                .setDescription(String((['**Wallet**:', s4d.database.get(String((String((s4dmessage.mentions.members.first().user).id) + '-cash'))), '\n', '**Bank**:', s4d.database.get(String((String((s4dmessage.mentions.members.first().user).id) + '-bank')))].join(''))))
-
-
-                            ],
-                            ,
-                            allowedMentions: {
-                                repliedUser: true
-                            }
-                        });
-                    } else {
-                        s4dmessage.reply({
-                            embeds: [new MessageEmbed()
                                 .setTitle(String((String((s4dmessage.mentions.members.first().user).username) + '\'s Balance')))
 
 
@@ -541,6 +526,22 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                         });
                     }
                 }
+                    } else {
+                      s4dmessage.reply({
+                            embeds: [new MessageEmbed()
+                                .setTitle(String((['**', (s4dmessage.mentions.members.first().user).username, '\'s Balance**'].join(''))))
+
+
+                                .setDescription(String((['**Wallet**:', s4d.database.get(String((String((s4dmessage.mentions.members.first().user).id) + '-cash'))), '\n', '**Bank**:', s4d.database.get(String((String((s4dmessage.mentions.members.first().user).id) + '-bank')))].join(''))))
+
+
+                            ],
+                            ,
+                            allowedMentions: {
+                                repliedUser: true
+                            }
+                        });
+                        
 
             } catch (err) {
                 command = arguments2.splice(0, 1)[0];
