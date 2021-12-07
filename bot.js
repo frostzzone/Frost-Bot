@@ -112,10 +112,16 @@ server.listen(3000);
           image: {
             url: null
           },
-          description: ('/aki - play akinator'+
+          description: ('**Games**'+
+                        '\n'+
+                        '/aki - play akinator'+
+                        '\n\n'+
+                        '**Others**'+
                         '\n'+
                         '/s4d - gives link for the specified preview (implemented in s4d faq bot)'+
-                        '\n'+ 
+                        '\n\n'+
+                        '**Tickets**'+
+                        '\n'+
                         '/ticketset channel:#channel - set channel to ticket channel'+
                         '\n'+
                         '/ticketclose - closes ticket (send in open ticket)'+
@@ -265,10 +271,14 @@ server.listen(3000);
           image: {
             url: null
           },
-          description: (',aki - play akinator'+
+          description: ('**Games**'+
+                        '\n'+
+                        ',aki - play akinator'+
                         '\n'+
                         ',snake - play snake'+
-                        '\n'+ 
+                        '\n\n'+
+                        '**Tickets**'+
+                        '\n'+
                         ',ticket <#channel> - set mentioned channel to ticket channel'+
                         '\n'+
                         ',close - closes ticket (send in open ticket)'+
@@ -276,10 +286,12 @@ server.listen(3000);
                         ',archive - archive ticket (send in open ticket)'+
                         '\n'+
                         ',unarchive - unarchives an archived ticket (send in archived ticket)'+
+                        '\n\n'+
+                        '**Economy**'+
                         '\n'+
-                        ',beg'+
+                        ',beg - beg for money (has a 5 second cooldown)'+
                         '\n'+
-                        ',bal'+
+                        ',bal - check your balance'+
                         '\n'+
                         'more soon'+
                        '\n'),
