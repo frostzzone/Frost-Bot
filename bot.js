@@ -127,7 +127,7 @@ server.listen(3000);
                         'more soon'+
                        '\n'),
           footer: {
-            text: 'These commands also work with the prefix ,'
+            text: 'Run `,help` to see prefix commands'
           },
           thumbnail: {
             url: null
@@ -267,9 +267,9 @@ server.listen(3000);
           },
           description: (',aki - play akinator'+
                         '\n'+
-                        ',s4d - gives link for the specified preview (implemented in s4d faq bot)'+
+                        ',snake - play snake'+
                         '\n'+ 
-                        ',ticketset channel:#channel - set channel to ticket channel'+
+                        ',ticket <#channel> - set mentioned channel to ticket channel'+
                         '\n'+
                         ',close - closes ticket (send in open ticket)'+
                         '\n'+
@@ -277,10 +277,12 @@ server.listen(3000);
                         '\n'+
                         ',unarchive - unarchives an archived ticket (send in archived ticket)'+
                         '\n'+
+
+
                         'more soon'+
                        '\n'),
           footer: {
-            text: 'These commands also work with the prefix ,'
+            text: 'Do `/help` to see slash commands'
           },
           thumbnail: {
             url: null
