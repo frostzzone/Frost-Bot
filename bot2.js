@@ -276,7 +276,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                         '\n'+
                         ',aki - play akinator'+
                         '\n'+
-                        ',snake - play snake'+
+                        ',snake - play snake\n,dt <yt|poker|chess|betrayal|fish|tile|snack|doodle>'+
                         '\n\n'+
                         '**Tickets**'+
                         '\n'+
@@ -381,6 +381,145 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
             gameOverTitle: 'Game Over'
         });
         snakeGame.newGame(s4dmessage);
+        }
+        if (command == 'dt') {
+            command = arguments2.splice(0, 1)[0];
+            if (command == 'yt') {
+                try {
+                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "youtube").then(async invite => {
+                        let embed = new Discord.MessageEmbed()
+                        embed.setTitle('Youtube together created');
+                        embed.setDescription((['[together](', invite.code, ')'].join('')));
+
+
+                    })
+                } catch (err) {
+                    let embed = new Discord.MessageEmbed()
+                    embed.setTitle('Failed');
+                    embed.setDescription('You need to be in a channel');
+
+
+                };
+            }
+            if (command == 'poker') {
+                try {
+                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "poker").then(async invite => {
+                        let embed = new Discord.MessageEmbed()
+                        embed.setTitle('Poker together created');
+                        embed.setDescription((['[together](', invite.code, ')'].join('')));
+
+
+                    })
+                } catch (err) {
+                    let embed = new Discord.MessageEmbed()
+                    embed.setTitle('Failed');
+                    embed.setDescription('You need to be in a channel');
+
+
+                };
+            }
+            if (command == 'chess') {
+                try {
+                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "chess").then(async invite => {
+                        let embed = new Discord.MessageEmbed()
+                        embed.setTitle('Chess together created');
+                        embed.setDescription((['[together](', invite.code, ')'].join('')));
+
+
+                    })
+                } catch (err) {
+                    let embed = new Discord.MessageEmbed()
+                    embed.setTitle('Failed');
+                    embed.setDescription('You need to be in a channel');
+
+
+                };
+            }
+            if (command == 'betrayal') {
+                try {
+                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "betrayal").then(async invite => {
+                        let embed = new Discord.MessageEmbed()
+                        embed.setTitle('Betrayal together created');
+                        embed.setDescription((['[together](', invite.code, ')'].join('')));
+
+
+                    })
+                } catch (err) {
+                    let embed = new Discord.MessageEmbed()
+                    embed.setTitle('Failed');
+                    embed.setDescription('You need to be in a channel');
+
+
+                };
+            }
+            if (command == 'fish') {
+                try {
+                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "fishing").then(async invite => {
+                        let embed = new Discord.MessageEmbed()
+                        embed.setTitle('fishing together');
+                        embed.setDescription((['[together](', invite.code, ')'].join('')));
+
+
+                    })
+                } catch (err) {
+                    let embed = new Discord.MessageEmbed()
+                    embed.setTitle('Failed');
+                    embed.setDescription('You need to be in a channel');
+
+
+                };
+            }
+            if (command == 'tile') {
+                try {
+                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "lettertile").then(async invite => {
+                        let embed = new Discord.MessageEmbed()
+                        embed.setTitle('Letter tile together created');
+                        embed.setDescription((['[together](', invite.code, ')'].join('')));
+
+
+                    })
+                } catch (err) {
+                    let embed = new Discord.MessageEmbed()
+                    embed.setTitle('Failed');
+                    embed.setDescription('You need to be in a channel');
+
+
+                };
+            }
+            if (command == 'snack') {
+                try {
+                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "wordsnack").then(async invite => {
+                        let embed = new Discord.MessageEmbed()
+                        embed.setTitle('Wordsnack together created');
+                        embed.setDescription((['[together](', invite.code, ')'].join('')));
+
+
+                    })
+                } catch (err) {
+                    let embed = new Discord.MessageEmbed()
+                    embed.setTitle('Failed');
+                    embed.setDescription('You need to be in a channel');
+
+
+                };
+            }
+            if (command == 'doodle') {
+                try {
+                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "doodlecrew").then(async invite => {
+                        let embed = new Discord.MessageEmbed()
+                        embed.setTitle('Doodlecrew together created');
+                        embed.setDescription((['[together](', invite.code, ')'].join('')));
+
+
+                    })
+                } catch (err) {
+                    let embed = new Discord.MessageEmbed()
+                    embed.setTitle('Failed');
+                    embed.setDescription('You need to be in a channel');
+
+
+                };
+            }
         }
     if (command == 'invite') {
             let embed = new Discord.MessageEmbed()
@@ -520,7 +659,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
 
 
                             ],
-                            ,
+                            
                             allowedMentions: {
                                 repliedUser: true
                             }
@@ -535,7 +674,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
 
 
                             ],
-                            ,
+                            
                             allowedMentions: {
                                 repliedUser: true
                             }
@@ -557,7 +696,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
 
 
                                 ],
-                                ,
+                                
                                 allowedMentions: {
                                     repliedUser: true
                                 }
@@ -572,7 +711,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
 
 
                                 ],
-                                ,
+                                
                                 allowedMentions: {
                                     repliedUser: true
                                 }
@@ -591,7 +730,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
 
 
                             ],
-                            ,
+                            
                             allowedMentions: {
                                 repliedUser: true
                             }
@@ -606,7 +745,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
 
 
                             ],
-                            ,
+                            
                             allowedMentions: {
                                 repliedUser: true
                             }

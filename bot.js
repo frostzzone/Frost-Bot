@@ -87,7 +87,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
       await delay(Number(10) * 1000);
       s4d.client.user.setActivity("your life", {
         type: "STREAMING",
-        url: 'https://github.com/frostzzone'
+        url: 'https://www.twitch.tv/nocopyrightsounds'
       });
 
       await delay(Number(10) * 1000);
@@ -276,7 +276,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                         '\n'+
                         ',aki - play akinator'+
                         '\n'+
-                        ',snake - play snake'+
+                        ',snake - play snake\n,dt <yt|poker|chess|betrayal|fish|tile|snack|doodle>'+
                         '\n\n'+
                         '**Tickets**'+
                         '\n'+
@@ -381,6 +381,145 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
             gameOverTitle: 'Game Over'
         });
         snakeGame.newGame(s4dmessage);
+        }
+        if (command == 'dt') {
+            command = arguments2.splice(0, 1)[0];
+            if (command == 'yt') {
+                try {
+                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "youtube").then(async invite => {
+                        let embed = new Discord.MessageEmbed()
+                        embed.setTitle('Youtube together created');
+                        embed.setDescription((['[together](', invite.code, ')'].join('')));
+
+
+                    })
+                } catch (err) {
+                    let embed = new Discord.MessageEmbed()
+                    embed.setTitle('Failed');
+                    embed.setDescription('You need to be in a channel');
+
+
+                };
+            }
+            if (command == 'poker') {
+                try {
+                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "poker").then(async invite => {
+                        let embed = new Discord.MessageEmbed()
+                        embed.setTitle('Poker together created');
+                        embed.setDescription((['[together](', invite.code, ')'].join('')));
+
+
+                    })
+                } catch (err) {
+                    let embed = new Discord.MessageEmbed()
+                    embed.setTitle('Failed');
+                    embed.setDescription('You need to be in a channel');
+
+
+                };
+            }
+            if (command == 'chess') {
+                try {
+                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "chess").then(async invite => {
+                        let embed = new Discord.MessageEmbed()
+                        embed.setTitle('Chess together created');
+                        embed.setDescription((['[together](', invite.code, ')'].join('')));
+
+
+                    })
+                } catch (err) {
+                    let embed = new Discord.MessageEmbed()
+                    embed.setTitle('Failed');
+                    embed.setDescription('You need to be in a channel');
+
+
+                };
+            }
+            if (command == 'betrayal') {
+                try {
+                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "betrayal").then(async invite => {
+                        let embed = new Discord.MessageEmbed()
+                        embed.setTitle('Betrayal together created');
+                        embed.setDescription((['[together](', invite.code, ')'].join('')));
+
+
+                    })
+                } catch (err) {
+                    let embed = new Discord.MessageEmbed()
+                    embed.setTitle('Failed');
+                    embed.setDescription('You need to be in a channel');
+
+
+                };
+            }
+            if (command == 'fish') {
+                try {
+                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "fishing").then(async invite => {
+                        let embed = new Discord.MessageEmbed()
+                        embed.setTitle('fishing together');
+                        embed.setDescription((['[together](', invite.code, ')'].join('')));
+
+
+                    })
+                } catch (err) {
+                    let embed = new Discord.MessageEmbed()
+                    embed.setTitle('Failed');
+                    embed.setDescription('You need to be in a channel');
+
+
+                };
+            }
+            if (command == 'tile') {
+                try {
+                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "lettertile").then(async invite => {
+                        let embed = new Discord.MessageEmbed()
+                        embed.setTitle('Letter tile together created');
+                        embed.setDescription((['[together](', invite.code, ')'].join('')));
+
+
+                    })
+                } catch (err) {
+                    let embed = new Discord.MessageEmbed()
+                    embed.setTitle('Failed');
+                    embed.setDescription('You need to be in a channel');
+
+
+                };
+            }
+            if (command == 'snack') {
+                try {
+                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "wordsnack").then(async invite => {
+                        let embed = new Discord.MessageEmbed()
+                        embed.setTitle('Wordsnack together created');
+                        embed.setDescription((['[together](', invite.code, ')'].join('')));
+
+
+                    })
+                } catch (err) {
+                    let embed = new Discord.MessageEmbed()
+                    embed.setTitle('Failed');
+                    embed.setDescription('You need to be in a channel');
+
+
+                };
+            }
+            if (command == 'doodle') {
+                try {
+                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "doodlecrew").then(async invite => {
+                        let embed = new Discord.MessageEmbed()
+                        embed.setTitle('Doodlecrew together created');
+                        embed.setDescription((['[together](', invite.code, ')'].join('')));
+
+
+                    })
+                } catch (err) {
+                    let embed = new Discord.MessageEmbed()
+                    embed.setTitle('Failed');
+                    embed.setDescription('You need to be in a channel');
+
+
+                };
+            }
         }
     if (command == 'invite') {
             let embed = new Discord.MessageEmbed()
@@ -500,50 +639,122 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
             }
         }
 
+        
         if (command == 'bal') {
-            if (s4d.database.has(String((String((s4dmessage.author).id) + '-cash')))) {
-                s4dmessage.reply({
-                    embeds: [{
-                        title: (String((s4dmessage.author).username) + '\'s balance'),
-                        color: null,
-                        image: {
-                            url: null
-                        },
-                        description: ('**Cash**: ' + String(s4d.database.get(String((String((s4dmessage.author).id) + '-cash'))))),
-                        footer: {
-                            text: null
-                        },
-                        thumbnail: {
-                            url: null
-                        }
-                    }],
-                    
-                    allowedMentions: {
-                        repliedUser: true
-                    }
-                });
-            } else {
-                s4dmessage.reply({
-                    embeds: [{
-                        title: (String((s4dmessage.author).username) + '\'s balance'),
-                        color: null,
-                        image: {
-                            url: null
-                        },
-                        description: 'You have never played before',
-                        footer: {
-                            text: null
-                        },
-                        thumbnail: {
-                            url: null
-                        }
-                    }],
-                    
-                    allowedMentions: {
-                        repliedUser: true
-                    }
-                });
+            if (!s4d.database.has(String((String((s4dmessage.author).id) + '-bank')))) {
+                s4d.database.set(String((String((s4dmessage.author).id) + '-bank')), 0);
             }
+            if (!s4d.database.has(String((String((s4dmessage.author).id) + '-cash')))) {
+                s4d.database.set(String((String((s4dmessage.author).id) + '-cash')), 0);
+            }
+            try {
+                if (!((s4dmessage.mentions.members.first().user) == null)) {
+                    if (!(s4d.database.get(String((String((s4dmessage.mentions.members.first().user).id) + '-cash'))) == null) && !(String((s4dmessage.mentions.members.first().user).id) + '-bank' == null)) {
+                        s4dmessage.reply({
+                            embeds: [new MessageEmbed()
+                                .setTitle(String((['**', (s4dmessage.mentions.members.first().user).username, '\'s Balance**'].join(''))))
+
+
+                                .setDescription(String((['**Wallet**: ', s4d.database.get(String((String((s4dmessage.mentions.members.first().user).id) + '-cash'))), '\n', '**Bank**: ', s4d.database.get(String((String((s4dmessage.mentions.members.first().user).id) + '-bank')))].join(''))))
+
+
+                            ],
+                            
+                            allowedMentions: {
+                                repliedUser: true
+                            }
+                        });
+                    } else {
+                        s4dmessage.reply({
+                            embeds: [new MessageEmbed()
+                                .setTitle(String((String((s4dmessage.mentions.members.first().user).username) + '\'s Balance')))
+
+
+                                .setDescription(String('This user has never played'))
+
+
+                            ],
+                            
+                            allowedMentions: {
+                                repliedUser: true
+                            }
+                        });
+                    }
+                }
+
+            } catch (err) {
+                command = arguments2.splice(0, 1)[0];
+                try {
+                    if (!!command.length) {
+                        if (!(s4d.database.get((((s4dmessage.guild).members.cache.get(command) || await (s4dmessage.guild).members.fetch(command)).user).id + '-cash') == null) && !(s4d.database.get((((s4dmessage.guild).members.cache.get(command) || await (s4dmessage.guild).members.fetch(command)).user).id + '-bank') == null)) {
+                            s4dmessage.reply({
+                                embeds: [new MessageEmbed()
+                                    .setTitle(String((['**', (((s4dmessage.guild).members.cache.get(command) || await (s4dmessage.guild).members.fetch(command)).user).username, '\'s Balance**'].join(''))))
+
+
+                                    .setDescription(String((['**Wallet**: ', s4d.database.get(String(((((s4dmessage.guild).members.cache.get(command) || await (s4dmessage.guild).members.fetch(command)).user).id + '-cash'))), '\n', '**Bank**: ', s4d.database.get(String(((((s4dmessage.guild).members.cache.get(command) || await (s4dmessage.guild).members.fetch(command)).user) + '-bank')))].join(''))))
+
+
+                                ],
+                                
+                                allowedMentions: {
+                                    repliedUser: true
+                                }
+                            });
+                        } else {
+                            s4dmessage.reply({
+                                embeds: [new MessageEmbed()
+                                    .setTitle(String((String((((s4dmessage.guild).members.cache.get(command) || await (s4dmessage.guild).members.fetch(command)).user).username) + '\'s Balance')))
+
+
+                                    .setDescription(String('This user has never played'))
+
+
+                                ],
+                                
+                                allowedMentions: {
+                                    repliedUser: true
+                                }
+                            });
+                        }
+                    }
+
+                } catch (err) {
+                    if (!(s4d.database.get(String((String((s4dmessage.author).id) + '-cash'))) == null) && !(String((s4dmessage.author).id) + '-bank' == null)) {
+                        s4dmessage.reply({
+                            embeds: [new MessageEmbed()
+                                .setTitle(String((['**', (s4dmessage.author).username, '\'s Balance**'].join(''))))
+
+
+                                .setDescription(String((['**Wallet**: ', s4d.database.get(String((String((s4dmessage.author).id) + '-cash'))), '\n', '**Bank**: ', s4d.database.get(String((String((s4dmessage.author).id) + '-bank')))].join(''))))
+
+
+                            ],
+                            
+                            allowedMentions: {
+                                repliedUser: true
+                            }
+                        });
+                    } else {
+                        s4dmessage.reply({
+                            embeds: [new MessageEmbed()
+                                .setTitle(String((String((s4dmessage.author).username) + '\'s Balance')))
+
+
+                                .setDescription(String('You have never played'))
+
+
+                            ],
+                            
+                            allowedMentions: {
+                                repliedUser: true
+                            }
+                        });
+                    }
+
+                };
+
+            };
         }
  
 
