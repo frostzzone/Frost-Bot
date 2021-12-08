@@ -390,14 +390,18 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                         let embed = new Discord.MessageEmbed()
                         embed.setTitle('Youtube together created');
                         embed.setDescription((['[together](', invite.code, ')'].join('')));
-
+                      (s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                     })
                 } catch (err) {
                     let embed = new Discord.MessageEmbed()
                     embed.setTitle('Failed');
                     embed.setDescription('You need to be in a channel');
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                 };
             }
@@ -407,14 +411,18 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                         let embed = new Discord.MessageEmbed()
                         embed.setTitle('Poker together created');
                         embed.setDescription((['[together](', invite.code, ')'].join('')));
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                     })
                 } catch (err) {
                     let embed = new Discord.MessageEmbed()
                     embed.setTitle('Failed');
                     embed.setDescription('You need to be in a channel');
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                 };
             }
@@ -424,14 +432,18 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                         let embed = new Discord.MessageEmbed()
                         embed.setTitle('Chess together created');
                         embed.setDescription((['[together](', invite.code, ')'].join('')));
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                     })
                 } catch (err) {
                     let embed = new Discord.MessageEmbed()
                     embed.setTitle('Failed');
                     embed.setDescription('You need to be in a channel');
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                 };
             }
@@ -441,14 +453,18 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                         let embed = new Discord.MessageEmbed()
                         embed.setTitle('Betrayal together created');
                         embed.setDescription((['[together](', invite.code, ')'].join('')));
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                     })
                 } catch (err) {
                     let embed = new Discord.MessageEmbed()
                     embed.setTitle('Failed');
                     embed.setDescription('You need to be in a channel');
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                 };
             }
@@ -458,14 +474,18 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                         let embed = new Discord.MessageEmbed()
                         embed.setTitle('fishing together');
                         embed.setDescription((['[together](', invite.code, ')'].join('')));
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                     })
                 } catch (err) {
                     let embed = new Discord.MessageEmbed()
                     embed.setTitle('Failed');
                     embed.setDescription('You need to be in a channel');
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                 };
             }
@@ -475,7 +495,9 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                         let embed = new Discord.MessageEmbed()
                         embed.setTitle('Letter tile together created');
                         embed.setDescription((['[together](', invite.code, ')'].join('')));
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                     })
                 } catch (err) {
@@ -483,7 +505,9 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                     embed.setTitle('Failed');
                     embed.setDescription('You need to be in a channel');
 
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
                 };
             }
             if (command == 'snack') {
@@ -492,14 +516,18 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                         let embed = new Discord.MessageEmbed()
                         embed.setTitle('Wordsnack together created');
                         embed.setDescription((['[together](', invite.code, ')'].join('')));
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                     })
                 } catch (err) {
                     let embed = new Discord.MessageEmbed()
                     embed.setTitle('Failed');
                     embed.setDescription('You need to be in a channel');
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                 };
             }
@@ -509,7 +537,9 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                         let embed = new Discord.MessageEmbed()
                         embed.setTitle('Doodlecrew together created');
                         embed.setDescription((['[together](', invite.code, ')'].join('')));
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                     })
                 } catch (err) {
@@ -517,7 +547,9 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                     embed.setTitle('Failed');
                     embed.setDescription('You need to be in a channel');
 
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
                 };
             }
         }
