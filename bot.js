@@ -18,6 +18,9 @@
   let https = require("https")
   const akinator = require("discord.js-akinator");
   const lyricsFinder = require('lyrics-finder');
+  const {
+        DiscordTogether
+    } = require('discord-together');
   const ticket = require('tickets-discord');
   const {
     start,
@@ -50,7 +53,7 @@
     partials: ["REACTION"]
   });
   logs(s4d.client);
-  var prefix, command, arguments2, commandwithprefix, random;
+  var prefix, command, arguments2, commandwithprefix, random, maxpages, page, inv_list, savedInvList;
 
   function mathRandomInt(a, b) {
         if (a > b) {
@@ -81,7 +84,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
   s4d.client.on('ready', async () => {
     prefix = ',';
 
-    savedInvList = ['axe', 0, 'balloon', 0, 'codeBlock', 0, 'candyCane', 0];
+    savedInvList = ['axe', 0, 'balloon', 0, 'codeBlock', 0, 'candyCane', 0, 'fireWork', 0];
 
     while (s4d.client && s4d.client.token) {
       await delay(Number(10) * 1000);
@@ -102,6 +105,44 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
     }
 
   });
+
+  // Gets shop pages
+    function shop_page(page) {
+        maxpages = 1;
+        if (page == 1) {
+            let embed = new Discord.MessageEmbed()
+            embed.setTitle('Shop');
+            embed.addField('🪓 Axe `axe`', 'Unlocks `chop` (has a chance of breaking)', true);
+            embed.addField('🎈 Balloon `ballo`', 'Personal coin boost for 10 min (`stacks on global boosts`)', true);
+            embed.setFooter(('Page 1/' + String(maxpages)), );
+            (s4dmessage.channel).send({
+                embeds: [embed]
+            });
+
+        }
+        if (page == 'event') {
+            maxpages = 0;
+            let embed = new Discord.MessageEmbed()
+            embed.setTitle('Event Shop');
+            if (((new Date().getMonth())) == 11) {
+                maxpages = (typeof maxpages == 'number' ? maxpages : 0) + 1;
+                embed.addField('<:candy_cane:916777883991674912> Candy Cane `candyc`', 'A seasonal collectable (only available during December)', false);
+            }
+            if (((new Date().getMonth())) == 11 || ((new Date().getMonth())) == 0) {
+                maxpages = (typeof maxpages == 'number' ? maxpages : 0) + 1;
+                embed.addField('🎆 Firework `firew`', 'Celebrate the beginning of a new year (available December and January)', false);
+            }
+            if (maxpages == 0) {
+                maxpages = (typeof maxpages == 'number' ? maxpages : 0) + 1;
+                embed.addField('No events', 'No events currently', false);
+            }
+            embed.setFooter(('Page event/' + String(maxpages)), );
+            (s4dmessage.channel).send({
+                embeds: [embed]
+            });
+
+        }
+    }
 
   s4d.client.on('interactionCreate', async (interaction) => {
     let member = interaction.guild.members.cache.get(interaction.member.user.id)
@@ -252,6 +293,53 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
         components: []
       })
     }
+    if ((interaction.commandName) == 'beg') {
+            if (s4d.database.has(String((String((interaction.member.user).id) + '-cash')))) {
+                random = mathRandomInt(1, 1000);
+                if (random == 69) {
+                    s4d.database.add(String((String((interaction.member.user).id) + '-cash')), parseInt(10000));
+                    await interaction.reply({
+                        embeds: [new MessageEmbed()
+                            .setTitle(String('🙏 Blessed'))
+
+
+                            .setDescription(String('"Here have `10000` coins" - frostzzone'))
+                            .setFooter(String('You got the 1 in 1000 chance'))
+
+
+                        ],
+                    });
+                } else {
+                    random = mathRandomInt(1, 200);
+                    s4d.database.add(String((String((interaction.member.user).id) + '-cash')), parseInt(random));
+                    await interaction.reply({
+                        embeds: [new MessageEmbed()
+                            .setTitle(String('Begger'))
+
+
+                            .setDescription(String((['"Here have `', random, '` coins" - Random person'].join(''))))
+                            .setFooter(String('Theres a 1 in 1000 chance for begging'))
+
+
+                        ],
+                    });
+                }
+            } else {
+                random = mathRandomInt(1, 200);
+                s4d.database.set(String((String((interaction.member.user).id) + '-cash')), (Number(random)));
+                await interaction.reply({
+                    embeds: [new MessageEmbed()
+                        .setTitle(String('Begger'))
+
+
+                        .setDescription(String((['"Here have `', random, '` coins" - Random person'].join(''))))
+                        .setFooter(String('Theres a 1 in 1000 chance for begging'))
+
+
+                    ],
+                });
+            }
+        }
 
   });
 
@@ -808,6 +896,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
             embed.addField('🎈 Balloon', (['You have (`', inv_list[(2 * 2 - 1)], '`)'].join('')), true);
             embed.addField('<:block:917859160203346000> Code Block', (['You have (`', inv_list[(3 * 2 - 1)], '`)'].join('')), true);
             embed.addField('<:candy_cane:916777883991674912> Candy Cane', (['You have (`', inv_list[(4 * 2 - 1)], '`)'].join('')), true);
+embed.addField('🎆 FireWork', (['you have (`', inv_list[(5 * 2 - 1)], '`)'].join('')), );
             s4dmessage.reply({
                 embeds: [embed]
             });

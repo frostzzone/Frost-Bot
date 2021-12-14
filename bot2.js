@@ -18,6 +18,9 @@
   let https = require("https")
   const akinator = require("discord.js-akinator");
   const lyricsFinder = require('lyrics-finder');
+  const {
+        DiscordTogether
+    } = require('discord-together');
   const ticket = require('tickets-discord');
   const {
     start,
@@ -87,7 +90,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
       await delay(Number(10) * 1000);
       s4d.client.user.setActivity("your life", {
         type: "STREAMING",
-        url: 'https://github.com/frostzzone'
+        url: 'https://www.twitch.tv/nocopyrightsounds'
       });
 
       await delay(Number(10) * 1000);
@@ -390,14 +393,18 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                         let embed = new Discord.MessageEmbed()
                         embed.setTitle('Youtube together created');
                         embed.setDescription((['[together](', invite.code, ')'].join('')));
-
+                      (s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                     })
                 } catch (err) {
                     let embed = new Discord.MessageEmbed()
                     embed.setTitle('Failed');
                     embed.setDescription('You need to be in a channel');
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                 };
             }
@@ -407,14 +414,18 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                         let embed = new Discord.MessageEmbed()
                         embed.setTitle('Poker together created');
                         embed.setDescription((['[together](', invite.code, ')'].join('')));
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                     })
                 } catch (err) {
                     let embed = new Discord.MessageEmbed()
                     embed.setTitle('Failed');
                     embed.setDescription('You need to be in a channel');
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                 };
             }
@@ -424,14 +435,18 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                         let embed = new Discord.MessageEmbed()
                         embed.setTitle('Chess together created');
                         embed.setDescription((['[together](', invite.code, ')'].join('')));
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                     })
                 } catch (err) {
                     let embed = new Discord.MessageEmbed()
                     embed.setTitle('Failed');
                     embed.setDescription('You need to be in a channel');
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                 };
             }
@@ -441,14 +456,18 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                         let embed = new Discord.MessageEmbed()
                         embed.setTitle('Betrayal together created');
                         embed.setDescription((['[together](', invite.code, ')'].join('')));
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                     })
                 } catch (err) {
                     let embed = new Discord.MessageEmbed()
                     embed.setTitle('Failed');
                     embed.setDescription('You need to be in a channel');
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                 };
             }
@@ -458,14 +477,18 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                         let embed = new Discord.MessageEmbed()
                         embed.setTitle('fishing together');
                         embed.setDescription((['[together](', invite.code, ')'].join('')));
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                     })
                 } catch (err) {
                     let embed = new Discord.MessageEmbed()
                     embed.setTitle('Failed');
                     embed.setDescription('You need to be in a channel');
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                 };
             }
@@ -475,7 +498,9 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                         let embed = new Discord.MessageEmbed()
                         embed.setTitle('Letter tile together created');
                         embed.setDescription((['[together](', invite.code, ')'].join('')));
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                     })
                 } catch (err) {
@@ -483,7 +508,9 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                     embed.setTitle('Failed');
                     embed.setDescription('You need to be in a channel');
 
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
                 };
             }
             if (command == 'snack') {
@@ -492,14 +519,18 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                         let embed = new Discord.MessageEmbed()
                         embed.setTitle('Wordsnack together created');
                         embed.setDescription((['[together](', invite.code, ')'].join('')));
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                     })
                 } catch (err) {
                     let embed = new Discord.MessageEmbed()
                     embed.setTitle('Failed');
                     embed.setDescription('You need to be in a channel');
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                 };
             }
@@ -509,7 +540,9 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                         let embed = new Discord.MessageEmbed()
                         embed.setTitle('Doodlecrew together created');
                         embed.setDescription((['[together](', invite.code, ')'].join('')));
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
 
                     })
                 } catch (err) {
@@ -517,7 +550,9 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                     embed.setTitle('Failed');
                     embed.setDescription('You need to be in a channel');
 
-
+(s4dmessage.channel).send({
+                embeds: [embed]
+            });
                 };
             }
         }
@@ -655,7 +690,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                                 .setTitle(String((['**', (s4dmessage.mentions.members.first().user).username, '\'s Balance**'].join(''))))
 
 
-                                .setDescription(String((['**Wallet**:', s4d.database.get(String((String((s4dmessage.mentions.members.first().user).id) + '-cash'))), '\n', '**Bank**:', s4d.database.get(String((String((s4dmessage.mentions.members.first().user).id) + '-bank')))].join(''))))
+                                .setDescription(String((['**Wallet**: ', s4d.database.get(String((String((s4dmessage.mentions.members.first().user).id) + '-cash'))), '\n', '**Bank**: ', s4d.database.get(String((String((s4dmessage.mentions.members.first().user).id) + '-bank')))].join(''))))
 
 
                             ],
@@ -686,13 +721,13 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                 command = arguments2.splice(0, 1)[0];
                 try {
                     if (!!command.length) {
-                        if (!(s4d.database.get(String((String(Number(command)) + '-cash'))) == null) && !(String(Number(command)) + '-bank' == null)) {
+                        if (!(s4d.database.get((((s4dmessage.guild).members.cache.get(command) || await (s4dmessage.guild).members.fetch(command)).user).id + '-cash') == null) && !(s4d.database.get((((s4dmessage.guild).members.cache.get(command) || await (s4dmessage.guild).members.fetch(command)).user).id + '-bank') == null)) {
                             s4dmessage.reply({
                                 embeds: [new MessageEmbed()
                                     .setTitle(String((['**', (((s4dmessage.guild).members.cache.get(command) || await (s4dmessage.guild).members.fetch(command)).user).username, '\'s Balance**'].join(''))))
 
 
-                                    .setDescription(String((['**Wallet**:', s4d.database.get(String((String(Number(command)) + '-cash'))), '\n', '**Bank**:', s4d.database.get(String((String(Number(command)) + '-bank')))].join(''))))
+                                    .setDescription(String((['**Wallet**: ', s4d.database.get(String(((((s4dmessage.guild).members.cache.get(command) || await (s4dmessage.guild).members.fetch(command)).user).id + '-cash'))), '\n', '**Bank**: ', s4d.database.get(String(((((s4dmessage.guild).members.cache.get(command) || await (s4dmessage.guild).members.fetch(command)).user) + '-bank')))].join(''))))
 
 
                                 ],
@@ -726,7 +761,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                                 .setTitle(String((['**', (s4dmessage.author).username, '\'s Balance**'].join(''))))
 
 
-                                .setDescription(String((['**Wallet**:', s4d.database.get(String((String((s4dmessage.author).id) + '-cash'))), '\n', '**Bank**:', s4d.database.get(String((String((s4dmessage.author).id) + '-bank')))].join(''))))
+                                .setDescription(String((['**Wallet**: ', s4d.database.get(String((String((s4dmessage.author).id) + '-cash'))), '\n', '**Bank**: ', s4d.database.get(String((String((s4dmessage.author).id) + '-bank')))].join(''))))
 
 
                             ],
@@ -741,7 +776,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
                                 .setTitle(String((String((s4dmessage.author).username) + '\'s Balance')))
 
 
-                                .setDescription(String('This user has never played'))
+                                .setDescription(String('You have never played'))
 
 
                             ],
