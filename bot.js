@@ -1,7 +1,11 @@
 let prefix = 'e!'
+
+const path = require('path')
 console.clear();
 const keepAlive = require("./server.js");
 const cmnd = require('./commands/index.js');
+
+let detabase = (path.join(__dirname, 'database.json'));
 
 (async () => {
   //hello :) hehe
@@ -818,7 +822,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
  
 
       if (command == 'inv') {
-            cmnd.inv(s4dmessage)
+            cmnd.inv(s4dmessage, detabase)
         }                     
         
         // This will set your ticket channel to mentioned channel

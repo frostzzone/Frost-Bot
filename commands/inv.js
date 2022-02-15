@@ -1,7 +1,7 @@
 let Database = require("easy-json-database")
 
-async function inv(message) {
-  let database = new Database("../database.json");
+async function inv(message, path) {
+  let database = new Database(path);
   if(database.has(String((String((message.author).id) + '-inv')))) {
     inv_list = database.get(String((String((message.author).id) + '-inv')));
     if (!(inv_list.length == savedInvList.length)) {
