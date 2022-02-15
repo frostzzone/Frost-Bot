@@ -1,5 +1,8 @@
+let prefix = 'e!'
 console.clear();
 const keepAlive = require("./server.js");
+const cmnd = require('./commands/index.js');
+
 (async () => {
   //hello :) hehe
   let process = require('process');
@@ -61,7 +64,7 @@ const keepAlive = require("./server.js");
     partials: ["REACTION", "CHANNEL"]
   });
   logs(s4d.client);
-  var prefix, command, arguments2, commandwithprefix, random, maxpages, page, inv_list, savedInvList;
+  var command, arguments2, commandwithprefix, random, maxpages, page, inv_list, savedInvList;
 
   function mathRandomInt(a, b) {
         if (a > b) {
@@ -81,6 +84,7 @@ const keepAlive = require("./server.js");
   await s4d.client.login(process.env.token).catch((e) => {
     s4d.tokenInvalid = true;
     s4d.tokenError = e;
+    console.log(e)
   });
 
   ticket.start(s4d.client, 'local'); 
@@ -88,8 +92,6 @@ const keepAlive = require("./server.js");
 console.log('Logged in as "'+ s4d.client.user.username + '"')
 
   s4d.client.on('ready', async () => {
-    prefix = ',';
-
     savedInvList = ['axe', 0, 'balloon', 0, 'codeBlock', 0, 'candyCane', 0, 'fireWork', 0];
 
     while (s4d.client && s4d.client.token) {
@@ -427,25 +429,25 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
           },
           description: ('**Games**'+
                         '\n'+
-                        ',aki - play akinator'+
+                        prefix + 'aki - play akinator'+
                         '\n'+
-                        ',snake - play snake\n,dt <yt|poker|chess|betrayal|fish|tile|snack|doodle>'+
+                        prefix + 'snake - play snake\n,dt <yt|poker|chess|betrayal|fish|tile|snack|doodle>'+
                         '\n\n'+
                         '**Tickets**'+
                         '\n'+
-                        ',ticket <#channel> - set mentioned channel to ticket channel'+
+                        prefix + 'ticket <#channel> - set mentioned channel to ticket channel'+
                         '\n'+
-                        ',close - closes ticket (send in open ticket)'+
+                        prefix + 'close - closes ticket (send in open ticket)'+
                         '\n'+
-                        ',archive - archive ticket (send in open ticket)'+
+                        prefix + 'archive - archive ticket (send in open ticket)'+
                         '\n'+
-                        ',unarchive - unarchives an archived ticket (send in archived ticket)'+
+                        prefix + 'unarchive - unarchives an archived ticket (send in archived ticket)'+
                         '\n\n'+
                         '**Economy**'+
                         '\n'+
-                        ',beg - beg for money (has a 5 second cooldown)'+
+                        prefix + 'beg - beg for money (has a 5 second cooldown)'+
                         '\n'+
-                        ',bal - check your balance'+
+                        prefix + 'bal - check your balance'+
                         '\n'+
                         'more soon'+
                        '\n'),
@@ -816,63 +818,21 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
  
 
       if (command == 'inv') {
-            if (s4d.database.has(String((String((s4dmessage.author).id) + '-inv')))) {
-                inv_list = s4d.database.get(String((String((s4dmessage.author).id) + '-inv')));
-                if (!(inv_list.length == savedInvList.length)) {
-                    var repeat_end = savedInvList.length - inv_list.length;
-                    for (var count = 0; count < repeat_end; count++) {
-                        inv_list.push((savedInvList[((inv_list.length + 1) - 1)]));
-                    }
-                }
-            } else {
-                inv_list = savedInvList;
-            }
-            let embed = new Discord.MessageEmbed()
-            embed.setTitle('Inventory');
-            embed.addField('🪓 Axe', (['You have (`', inv_list[(1 * 2 - 1)], '`)'].join('')), true);
-            embed.addField('🎈 Balloon', (['You have (`', inv_list[(2 * 2 - 1)], '`)'].join('')), true);
-            embed.addField('<:block:917859160203346000> Code Block', (['You have (`', inv_list[(3 * 2 - 1)], '`)'].join('')), true);
-            embed.addField('<:candy_cane:916777883991674912> Candy Cane', (['You have (`', inv_list[(4 * 2 - 1)], '`)'].join('')), true);
-embed.addField('🎆 FireWork', (['you have (`', inv_list[(5 * 2 - 1)], '`)'].join('')), );
-            s4dmessage.reply({
-                embeds: [embed]
-            });
-
-            s4d.database.set(String((String((s4dmessage.author).id) + '-inv')), inv_list);
+            cmnd.inv(s4dmessage)
         }                     
         
         // This will set your ticket channel to mentioned channel
         if (command == 'ticket') {
-          try {
-            ticket.setup(s4dmessage, s4dmessage.mentions.channels.first().id);
-            s4dmessage.channel.send({
-              content: String((['I have set the ticket channel to ', '<#', s4dmessage.mentions.channels.first(), '>'].join('')))
-            });
-
-          } catch (err) {
-            s4dmessage.channel.send({
-              content: String('U need to mention a channel!')
-            });
-
-          };
+          cmnd.tick(s4dmessage)
         }
         if (command == 'close') {
-          ticket.close(s4dmessage.channel);
-          s4dmessage.channel.send({
-            content: String('Closed the ticket')
-          });
+          cmnd.close(s4dmessage)
         }
         if (command == 'archive') {
-          s4dmessage.channel.send({
-            content: String('Archived the ticket')
-          });
-          ticket.archive(s4dmessage.channel);
+          cmnd.archive(s4dmessage);
         }
         if (command == 'unarchive') {
-          s4dmessage.channel.send({
-            content: String('Unarchived the ticket')
-          });
-          ticket.unarchive(s4dmessage.channel);
+          cmnd.unarchive(s4dmessage);
         }
       }
     }
