@@ -1,3 +1,5 @@
+console.clear();
+const keepAlive = require("./server.js");
 (async () => {
   //hello :) hehe
   let process = require('process');
@@ -15,6 +17,13 @@
     MessageSelectMenu
   } = require("discord.js")
   let logs = require("discord-logs")
+  const {
+        Calculator,
+        Snake,
+        Fight,
+        RockPaperScissors,
+        WouldYouRather
+    } = require('weky')
   let https = require("https")
   const akinator = require("discord.js-akinator");
   const lyricsFinder = require('lyrics-finder');
@@ -27,7 +36,6 @@
     login
   } = require('tickets-discord');
   const SnakeGame = require('snakecord');
-  const { Snake } = require('weky');
   require('events').EventEmitter.defaultMaxListeners = 50;
   const devMode = typeof __E_IS_DEV !== "undefined" && __E_IS_DEV;
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -50,7 +58,7 @@
   };
   s4d.client = new s4d.Discord.Client({
     intents: [Object.values(s4d.Discord.Intents.FLAGS).reduce((acc, p) => acc | p, 0)],
-    partials: ["REACTION"]
+    partials: ["REACTION", "CHANNEL"]
   });
   logs(s4d.client);
   var prefix, command, arguments2, commandwithprefix, random, maxpages, page, inv_list, savedInvList;
@@ -65,20 +73,18 @@
         return Math.floor(Math.random() * (b - a + 1) + a);
     }
 
+  function colourRandom() {
+        var num = Math.floor(Math.random() * Math.pow(2, 24));
+        return '#' + ('00000' + num.toString(16)).substr(-6);
+    }
+
   await s4d.client.login(process.env.token).catch((e) => {
     s4d.tokenInvalid = true;
     s4d.tokenError = e;
   });
 
-  ticket.start(s4d.client, 'local');
+  ticket.start(s4d.client, 'local'); 
 
-  //create webserver
-const http = require('http');
-const server = http.createServer((req, res) => {
-    res.writeHead(200);
-    res.end('This site was created for make bot online 25/8');
-});
-server.listen(3000);
 console.log('Logged in as "'+ s4d.client.user.username + '"')
 
   s4d.client.on('ready', async () => {
@@ -144,6 +150,27 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
         }
     }
 
+                    s4d.client.on('interactionCreate', async (interaction) => {
+        if ((interaction.customId) == 'testid') {
+            if ((interaction.member)._roles.includes(((interaction.guild).roles.cache.get('926319451215892510')).id)) {
+                (interaction.member).roles.remove(((interaction.guild).roles.cache.get('926319451215892510')));
+                await interaction.reply({
+                    ephemeral: true,
+                    content: 'removed role',
+                    components: []
+                });
+            } else {
+                (interaction.member).roles.add(((interaction.guild).roles.cache.get('926319451215892510')));
+                await interaction.reply({
+                    ephemeral: true,
+                    content: 'role added',
+                    components: []
+                });
+            }
+        }
+
+    });
+
   s4d.client.on('interactionCreate', async (interaction) => {
     let member = interaction.guild.members.cache.get(interaction.member.user.id)
     if ((interaction.commandName) == 'help') {
@@ -182,6 +209,26 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
           }
         }],
       });
+    }
+    if ((interaction.commandName) == 'eval') {
+      if ((interaction.member.user).id == '712342308565024818') {
+            try {
+                eval(interaction.options.getString('code'));
+            } catch (err) {
+                await interaction.reply({
+                    content: String(err),
+                    ephemeral: true,
+                    components: []
+                });
+
+            }
+        } else {
+          await interaction.reply({
+            content: String('This is an owner only command'),
+            ephemeral: true,
+            components: []
+          })
+        }
     }
     if ((interaction.commandName) == 's4d') {
       await interaction.reply({
@@ -273,13 +320,29 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
       }
     }
     if ((interaction.commandName) == 'snake') {
-      await interaction.reply({
-        content: (snakeGame.newGame(interaction)),
-        ephemeral: false,
-        components: []
-
-      })
-    }
+      await sSnake({
+            message: interaction,
+            slash: true,
+            embed: {
+                title: 'Snake',
+                description: 'GG, you scored **{{score}}** points!',
+                color: (colourRandom()),
+                footer: 'My foot 🦶',
+                timestamp: true
+            },
+            emojis: {
+                empty: '⬛',
+                snakeBody: '🟩',
+                food: '🫐',
+                up: '⬆️',
+                right: '⬅️',
+                down: '⬇️',
+                left: '➡️',
+            },
+            othersMessage: 'Only <@{{author}}> can use the buttons!',
+            buttonText: 'cancel'
+        });
+      }
     if ((interaction.commandName) == 'aki') {
       await interaction.reply({
         content: (
@@ -294,6 +357,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
       })
     }
     if ((interaction.commandName) == 'beg') {
+      
             if (s4d.database.has(String((String((interaction.member.user).id) + '-cash')))) {
                 random = mathRandomInt(1, 1000);
                 if (random == 69) {
@@ -346,6 +410,7 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
 
   s4d.client.on('messageCreate', async (s4dmessage) => {
     if (!((s4dmessage.author).bot)) {
+      if (((s4dmessage.channel).type) == 'DM' || (s4dmessage.channel).type == "GUILD_TEXT") {
       arguments2 = (s4dmessage.content).split(' ');
       commandwithprefix = arguments2.splice(0, 1)[0];
       if ((commandwithprefix || '').startsWith(prefix || '')) {
@@ -393,6 +458,23 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
         }],
       });
         }
+        if (command == 'eval') {
+          if ((s4dmessage.author.id) == '712342308565024818') {
+            try {
+                eval((arguments2.join(' ')));
+
+            } catch (err) {
+                s4dmessage.channel.send({
+                    content: String(err)
+                });
+
+            }
+        } else {
+          s4dmessage.reply({
+            content: String('This is an owner only command')
+          })
+        }
+      }
         if (command == 'aki') {
           s4dmessage.channel.sendTyping();
           await delay(Number(1) * 1000);
@@ -462,185 +544,40 @@ console.log('Logged in as "'+ s4d.client.user.username + '"')
           });
         }
         if (command == 'snake') {
-          const snakeGame = new SnakeGame({
-            title: 'Snake Game',
-            color: 'GREEN',
-            timestamp: false,
-            gameOverTitle: 'Game Over'
+          await Snake({
+            message: s4dmessage,
+            embed: {
+                title: 'Snake',
+                description: 'GG, you scored **{{score}}** points!',
+                color: (colourRandom()),
+                footer: 'My foot 🦶',
+                timestamp: true
+            },
+            emojis: {
+                empty: '⬛',
+                snakeBody: '🟩',
+                food: '🫐',
+                up: '⬆️',
+                right: '⬅️',
+                down: '⬇️',
+                left: '➡️',
+            },
+            othersMessage: 'Only <@{{author}}> can use the buttons!',
+            buttonText: 'cancel'
         });
-        snakeGame.newGame(s4dmessage);
         }
-        if (command == 'dt') {
-            command = arguments2.splice(0, 1)[0];
-            if (command == 'yt') {
-                try {
-                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "youtube").then(async invite => {
-                        let embed = new Discord.MessageEmbed()
-                        embed.setTitle('Youtube together created');
-                        embed.setDescription((['[together](', invite.code, ')'].join('')));
-                      (s4dmessage.channel).send({
-                embeds: [embed]
-            });
-
-                    })
-                } catch (err) {
-                    let embed = new Discord.MessageEmbed()
-                    embed.setTitle('Failed');
-                    embed.setDescription('You need to be in a channel');
-(s4dmessage.channel).send({
-                embeds: [embed]
-            });
-
-                };
-            }
-            if (command == 'poker') {
-                try {
-                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "poker").then(async invite => {
-                        let embed = new Discord.MessageEmbed()
-                        embed.setTitle('Poker together created');
-                        embed.setDescription((['[together](', invite.code, ')'].join('')));
-(s4dmessage.channel).send({
-                embeds: [embed]
-            });
-
-                    })
-                } catch (err) {
-                    let embed = new Discord.MessageEmbed()
-                    embed.setTitle('Failed');
-                    embed.setDescription('You need to be in a channel');
-(s4dmessage.channel).send({
-                embeds: [embed]
-            });
-
-                };
-            }
-            if (command == 'chess') {
-                try {
-                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "chess").then(async invite => {
-                        let embed = new Discord.MessageEmbed()
-                        embed.setTitle('Chess together created');
-                        embed.setDescription((['[together](', invite.code, ')'].join('')));
-(s4dmessage.channel).send({
-                embeds: [embed]
-            });
-
-                    })
-                } catch (err) {
-                    let embed = new Discord.MessageEmbed()
-                    embed.setTitle('Failed');
-                    embed.setDescription('You need to be in a channel');
-(s4dmessage.channel).send({
-                embeds: [embed]
-            });
-
-                };
-            }
-            if (command == 'betrayal') {
-                try {
-                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "betrayal").then(async invite => {
-                        let embed = new Discord.MessageEmbed()
-                        embed.setTitle('Betrayal together created');
-                        embed.setDescription((['[together](', invite.code, ')'].join('')));
-(s4dmessage.channel).send({
-                embeds: [embed]
-            });
-
-                    })
-                } catch (err) {
-                    let embed = new Discord.MessageEmbed()
-                    embed.setTitle('Failed');
-                    embed.setDescription('You need to be in a channel');
-(s4dmessage.channel).send({
-                embeds: [embed]
-            });
-
-                };
-            }
-            if (command == 'fish') {
-                try {
-                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "fishing").then(async invite => {
-                        let embed = new Discord.MessageEmbed()
-                        embed.setTitle('fishing together');
-                        embed.setDescription((['[together](', invite.code, ')'].join('')));
-(s4dmessage.channel).send({
-                embeds: [embed]
-            });
-
-                    })
-                } catch (err) {
-                    let embed = new Discord.MessageEmbed()
-                    embed.setTitle('Failed');
-                    embed.setDescription('You need to be in a channel');
-(s4dmessage.channel).send({
-                embeds: [embed]
-            });
-
-                };
-            }
-            if (command == 'tile') {
-                try {
-                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "lettertile").then(async invite => {
-                        let embed = new Discord.MessageEmbed()
-                        embed.setTitle('Letter tile together created');
-                        embed.setDescription((['[together](', invite.code, ')'].join('')));
-(s4dmessage.channel).send({
-                embeds: [embed]
-            });
-
-                    })
-                } catch (err) {
-                    let embed = new Discord.MessageEmbed()
-                    embed.setTitle('Failed');
-                    embed.setDescription('You need to be in a channel');
-
-(s4dmessage.channel).send({
-                embeds: [embed]
-            });
-                };
-            }
-            if (command == 'snack') {
-                try {
-                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "wordsnack").then(async invite => {
-                        let embed = new Discord.MessageEmbed()
-                        embed.setTitle('Wordsnack together created');
-                        embed.setDescription((['[together](', invite.code, ')'].join('')));
-(s4dmessage.channel).send({
-                embeds: [embed]
-            });
-
-                    })
-                } catch (err) {
-                    let embed = new Discord.MessageEmbed()
-                    embed.setTitle('Failed');
-                    embed.setDescription('You need to be in a channel');
-(s4dmessage.channel).send({
-                embeds: [embed]
-            });
-
-                };
-            }
-            if (command == 'doodle') {
-                try {
-                    s4d.client.discordTogether.createTogetherCode((s4dmessage.member.voice.channel.id), "doodlecrew").then(async invite => {
-                        let embed = new Discord.MessageEmbed()
-                        embed.setTitle('Doodlecrew together created');
-                        embed.setDescription((['[together](', invite.code, ')'].join('')));
-(s4dmessage.channel).send({
-                embeds: [embed]
-            });
-
-                    })
-                } catch (err) {
-                    let embed = new Discord.MessageEmbed()
-                    embed.setTitle('Failed');
-                    embed.setDescription('You need to be in a channel');
-
-(s4dmessage.channel).send({
-                embeds: [embed]
-            });
-                };
-            }
-        }
+        if (command == "calc") {await Calculator({
+        message: s4dmessage,
+        embed: {
+            title: 'Cal cu litor',
+            color: (colourRandom()),
+            footer: 'my foot 🦶',
+            timestamp: true
+        },
+        disabledQuery: 'This calculator is disabled',
+        invalidQuery: 'Well that dont work here',
+        othersMessage: 'Only <@{{author}}> can use the buttons!'
+    });}
     if (command == 'invite') {
             let embed = new Discord.MessageEmbed()
             embed.setTitle('Thanks,')
@@ -937,31 +874,11 @@ embed.addField('🎆 FireWork', (['you have (`', inv_list[(5 * 2 - 1)], '`)'].jo
           });
           ticket.unarchive(s4dmessage.channel);
         }
-    if (command == 'eval') {
-            if ((s4dmessage.member.id) == '712342308565024818') {
-                try {
-                    s4dmessage.delete();
-                    await eval((arguments2.join(' ')));
-
-                } catch (err) {
-                  
-                    s4dmessage.channel.send({
-                        content: String('I ran into an error')
-                    }).then(async (s4dreply) => {
-                        s4dmessage.delete();
-                        await delay(Number(10) * 1000);
-                        s4dreply.delete();
-
-                    });
-
-                };
-            }
-        }
       }
     }
-
+      }
   });
-  
+  keepAlive()
   return s4d
 })();;
 
