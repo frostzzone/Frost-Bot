@@ -1,11 +1,11 @@
 const ticket = require('tickets-discord');
 
-async function close(message) {
-  message.channel.send({
+async function close(s4dmessage) {
+  s4dmessage.channel.send({
             content: String('Closed the ticket')
           });
   
-  ticket.close(message.channel);
+  ticket.close(s4dmessage.channel);
 }
 module.exports = close
 console.log("loaded close.js")
